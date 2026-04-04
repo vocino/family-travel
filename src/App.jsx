@@ -11,6 +11,199 @@ const TEAL    = '#0d9488'
 const RED     = '#dc2626'
 const FONT    = "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif"
 
+// ─── Destinations ─────────────────────────────────────────────────────────────
+// Monthly scores (1–5) across four dimensions. Higher is better.
+//   weather:    pleasant temps, low rain, comfortable humidity
+//   crowds:     5 = uncrowded, 1 = peak tourist crush
+//   cost:       5 = cheapest flights/hotels, 1 = peak pricing
+//   familyFit:  kid-friendly seasonal events, school-break alignment, outdoor activity options
+const DESTINATIONS = [
+  {
+    id: 'rome', name: 'Rome', country: 'Italy', emoji: '🏛',
+    minDays: 5, idealDays: 8,
+    months: [
+      /* Jan */ { weather: 2, crowds: 4, cost: 4, familyFit: 2, notes: 'Cool and rainy, but museums are empty' },
+      /* Feb */ { weather: 2, crowds: 4, cost: 4, familyFit: 2, notes: 'Carnival season, still chilly' },
+      /* Mar */ { weather: 3, crowds: 3, cost: 3, familyFit: 3, notes: 'Warming up, Easter crowds possible' },
+      /* Apr */ { weather: 4, crowds: 3, cost: 3, familyFit: 4, notes: 'Ideal temps, outdoor dining, spring blooms' },
+      /* May */ { weather: 5, crowds: 3, cost: 3, familyFit: 5, notes: 'Best weather, great for walking with kids' },
+      /* Jun */ { weather: 4, crowds: 2, cost: 2, familyFit: 4, notes: 'Getting hot, summer crowds arriving' },
+      /* Jul */ { weather: 2, crowds: 1, cost: 1, familyFit: 2, notes: 'Extreme heat, peak crowds and prices' },
+      /* Aug */ { weather: 2, crowds: 2, cost: 2, familyFit: 2, notes: 'Many locals leave, sweltering but some deals' },
+      /* Sep */ { weather: 4, crowds: 3, cost: 3, familyFit: 4, notes: 'Heat breaks, shoulder season sweet spot' },
+      /* Oct */ { weather: 4, crowds: 3, cost: 3, familyFit: 4, notes: 'Mild weather, harvest food festivals' },
+      /* Nov */ { weather: 3, crowds: 4, cost: 4, familyFit: 3, notes: 'Cooler, uncrowded, good prices' },
+      /* Dec */ { weather: 2, crowds: 3, cost: 3, familyFit: 3, notes: 'Christmas markets, festive but cold and rainy' },
+    ],
+  },
+  {
+    id: 'tokyo', name: 'Tokyo', country: 'Japan', emoji: '⛩',
+    minDays: 7, idealDays: 12,
+    months: [
+      /* Jan */ { weather: 3, crowds: 4, cost: 3, familyFit: 3, notes: 'Cold but clear, New Year shrines' },
+      /* Feb */ { weather: 3, crowds: 4, cost: 4, familyFit: 3, notes: 'Early plum blossoms, uncrowded' },
+      /* Mar */ { weather: 4, crowds: 2, cost: 2, familyFit: 5, notes: 'Cherry blossom season — magical but popular' },
+      /* Apr */ { weather: 5, crowds: 2, cost: 2, familyFit: 5, notes: 'Late sakura, perfect temps, parks are stunning' },
+      /* May */ { weather: 4, crowds: 3, cost: 3, familyFit: 4, notes: 'Golden Week early May, then pleasant and calm' },
+      /* Jun */ { weather: 2, crowds: 4, cost: 4, familyFit: 2, notes: 'Rainy season — humid, frequent downpours' },
+      /* Jul */ { weather: 2, crowds: 3, cost: 3, familyFit: 3, notes: 'Hot and humid, but summer festivals and fireworks' },
+      /* Aug */ { weather: 2, crowds: 3, cost: 2, familyFit: 3, notes: 'Peak heat, Obon holiday, some closures' },
+      /* Sep */ { weather: 3, crowds: 4, cost: 4, familyFit: 3, notes: 'Typhoon risk, but crowds thin out' },
+      /* Oct */ { weather: 5, crowds: 3, cost: 3, familyFit: 5, notes: 'Perfect weather, fall foliage begins' },
+      /* Nov */ { weather: 4, crowds: 3, cost: 3, familyFit: 5, notes: 'Peak autumn colors, comfortable temps' },
+      /* Dec */ { weather: 3, crowds: 3, cost: 3, familyFit: 4, notes: 'Holiday illuminations, winter markets, cool but clear' },
+    ],
+  },
+  {
+    id: 'london', name: 'London', country: 'UK', emoji: '🎡',
+    minDays: 4, idealDays: 7,
+    months: [
+      /* Jan */ { weather: 1, crowds: 4, cost: 5, familyFit: 3, notes: 'Cold and dark, but cheapest flights and great museums' },
+      /* Feb */ { weather: 1, crowds: 4, cost: 4, familyFit: 2, notes: 'Half-term crowds mid-month, otherwise quiet' },
+      /* Mar */ { weather: 2, crowds: 3, cost: 3, familyFit: 3, notes: 'Warming slowly, daffodils in parks' },
+      /* Apr */ { weather: 3, crowds: 3, cost: 3, familyFit: 4, notes: 'Spring arrives, longer days, Easter activities' },
+      /* May */ { weather: 4, crowds: 3, cost: 3, familyFit: 4, notes: 'Pleasant, bank holidays, Chelsea Flower Show' },
+      /* Jun */ { weather: 5, crowds: 2, cost: 2, familyFit: 5, notes: 'Best weather, longest days, outdoor everything' },
+      /* Jul */ { weather: 4, crowds: 2, cost: 2, familyFit: 5, notes: 'Warm, parks alive, summer school holidays begin' },
+      /* Aug */ { weather: 4, crowds: 2, cost: 2, familyFit: 4, notes: 'Warm but peak tourist season, Notting Hill Carnival' },
+      /* Sep */ { weather: 3, crowds: 3, cost: 3, familyFit: 4, notes: 'Still pleasant, crowds ease, great shoulder month' },
+      /* Oct */ { weather: 2, crowds: 3, cost: 3, familyFit: 3, notes: 'Autumn colors, half-term, getting dark early' },
+      /* Nov */ { weather: 1, crowds: 4, cost: 4, familyFit: 3, notes: 'Bonfire Night, Christmas lights go up late month' },
+      /* Dec */ { weather: 1, crowds: 3, cost: 3, familyFit: 4, notes: 'Christmas markets, pantomimes, festive atmosphere' },
+    ],
+  },
+  {
+    id: 'disneyland', name: 'Disneyland', country: 'USA', emoji: '🏰',
+    minDays: 3, idealDays: 5,
+    months: [
+      /* Jan */ { weather: 4, crowds: 5, cost: 5, familyFit: 4, notes: 'Post-holiday lull — shortest waits of the year' },
+      /* Feb */ { weather: 4, crowds: 4, cost: 4, familyFit: 4, notes: 'Low crowds except Presidents\' Day week' },
+      /* Mar */ { weather: 4, crowds: 2, cost: 2, familyFit: 3, notes: 'Spring break rush begins mid-month' },
+      /* Apr */ { weather: 4, crowds: 2, cost: 2, familyFit: 3, notes: 'Spring break crowds linger, Easter busy' },
+      /* May */ { weather: 5, crowds: 3, cost: 3, familyFit: 5, notes: 'Great weather, lighter crowds before summer' },
+      /* Jun */ { weather: 4, crowds: 1, cost: 1, familyFit: 3, notes: 'Summer surge starts — long lines, peak prices' },
+      /* Jul */ { weather: 3, crowds: 1, cost: 1, familyFit: 2, notes: 'Peak everything — hot, packed, expensive' },
+      /* Aug */ { weather: 3, crowds: 1, cost: 1, familyFit: 2, notes: 'Still peak — consider Halloween season late Aug' },
+      /* Sep */ { weather: 4, crowds: 3, cost: 3, familyFit: 5, notes: 'Halloween overlay begins, crowds drop fast' },
+      /* Oct */ { weather: 5, crowds: 3, cost: 3, familyFit: 5, notes: 'Oogie Boogie Bash, fall decorations, great temps' },
+      /* Nov */ { weather: 4, crowds: 3, cost: 3, familyFit: 5, notes: 'Holiday season starts mid-Nov, festive but busy Thanksgiving' },
+      /* Dec */ { weather: 3, crowds: 2, cost: 2, familyFit: 4, notes: 'Beautiful decorations, very crowded Christmas–New Year' },
+    ],
+  },
+  {
+    id: 'cancun', name: 'Cancún', country: 'Mexico', emoji: '🏖',
+    minDays: 4, idealDays: 7,
+    months: [
+      /* Jan */ { weather: 4, crowds: 3, cost: 3, familyFit: 4, notes: 'Dry season, warm water, post-holiday value' },
+      /* Feb */ { weather: 5, crowds: 3, cost: 3, familyFit: 4, notes: 'Perfect beach weather, whale sharks departing' },
+      /* Mar */ { weather: 5, crowds: 1, cost: 1, familyFit: 2, notes: 'Spring break invasion — very crowded, not ideal for families' },
+      /* Apr */ { weather: 5, crowds: 2, cost: 2, familyFit: 4, notes: 'Hot and dry, Semana Santa early month' },
+      /* May */ { weather: 4, crowds: 4, cost: 4, familyFit: 4, notes: 'Hot, low crowds, rainy season just starting' },
+      /* Jun */ { weather: 3, crowds: 4, cost: 4, familyFit: 3, notes: 'Hurricane season begins, afternoon storms' },
+      /* Jul */ { weather: 3, crowds: 3, cost: 3, familyFit: 3, notes: 'Hot and humid, summer family travel picks up' },
+      /* Aug */ { weather: 3, crowds: 3, cost: 3, familyFit: 3, notes: 'Peak hurricane risk, but good resort deals' },
+      /* Sep */ { weather: 2, crowds: 5, cost: 5, familyFit: 2, notes: 'Hurricane peak, cheapest month, risky for travel' },
+      /* Oct */ { weather: 3, crowds: 5, cost: 5, familyFit: 3, notes: 'Late hurricane season, Day of Dead prep, quiet' },
+      /* Nov */ { weather: 4, crowds: 4, cost: 4, familyFit: 4, notes: 'Dry season returns, Day of the Dead, great value' },
+      /* Dec */ { weather: 4, crowds: 2, cost: 2, familyFit: 4, notes: 'Holiday rush picks up, warm escape from winter' },
+    ],
+  },
+  {
+    id: 'reykjavik', name: 'Reykjavik', country: 'Iceland', emoji: '🌋',
+    minDays: 5, idealDays: 9,
+    months: [
+      /* Jan */ { weather: 1, crowds: 4, cost: 4, familyFit: 3, notes: 'Dark and cold, but northern lights and ice caves' },
+      /* Feb */ { weather: 1, crowds: 4, cost: 4, familyFit: 3, notes: 'Northern lights season, days getting longer' },
+      /* Mar */ { weather: 2, crowds: 3, cost: 3, familyFit: 3, notes: 'Still wintry, whale watching starts, aurora fading' },
+      /* Apr */ { weather: 2, crowds: 3, cost: 3, familyFit: 3, notes: 'Snow melting, puffins arriving, shoulder pricing' },
+      /* May */ { weather: 3, crowds: 3, cost: 3, familyFit: 4, notes: 'Midnight sun beginning, waterfalls at peak flow' },
+      /* Jun */ { weather: 4, crowds: 2, cost: 1, familyFit: 5, notes: 'Midnight sun, 24hr daylight, peak hiking, puffins nesting' },
+      /* Jul */ { weather: 4, crowds: 1, cost: 1, familyFit: 5, notes: 'Warmest month, busiest, endless daylight, whale watching peak' },
+      /* Aug */ { weather: 4, crowds: 2, cost: 2, familyFit: 5, notes: 'Still warm-ish, puffins, crowds easing late month' },
+      /* Sep */ { weather: 3, crowds: 3, cost: 3, familyFit: 4, notes: 'Northern lights return, fall colors, shoulder prices' },
+      /* Oct */ { weather: 2, crowds: 4, cost: 4, familyFit: 3, notes: 'Getting dark and cold, aurora season, quiet' },
+      /* Nov */ { weather: 1, crowds: 5, cost: 5, familyFit: 2, notes: 'Dark, stormy, cheapest month, ice caves opening' },
+      /* Dec */ { weather: 1, crowds: 4, cost: 3, familyFit: 3, notes: 'Festive Reykjavik, northern lights, only ~4hrs daylight' },
+    ],
+  },
+]
+
+// ─── Seasonality Scoring ──────────────────────────────────────────────────────
+// Weights shift based on trip length — longer trips make crowds/cost matter more
+function scoreDestination(dest, startDate, endDate) {
+  const days = diffDays(startDate, endDate)
+  const isLong = days >= 7
+  const weights = isLong
+    ? { weather: 0.30, crowds: 0.25, cost: 0.25, familyFit: 0.20 }
+    : { weather: 0.35, crowds: 0.15, cost: 0.15, familyFit: 0.35 }
+
+  // Collect the months this trip spans
+  const months = []
+  const d = new Date(startDate)
+  while (d <= endDate) {
+    const m = d.getMonth()
+    if (months.length === 0 || months[months.length - 1] !== m) months.push(m)
+    d.setDate(d.getDate() + 1)
+  }
+
+  // Average scores across spanned months
+  let totals = { weather: 0, crowds: 0, cost: 0, familyFit: 0 }
+  for (const m of months) {
+    const md = dest.months[m]
+    totals.weather += md.weather
+    totals.crowds += md.crowds
+    totals.cost += md.cost
+    totals.familyFit += md.familyFit
+  }
+  const n = months.length
+  const avg = {
+    weather: totals.weather / n,
+    crowds: totals.crowds / n,
+    cost: totals.cost / n,
+    familyFit: totals.familyFit / n,
+  }
+
+  const weighted = avg.weather * weights.weather + avg.crowds * weights.crowds
+    + avg.cost * weights.cost + avg.familyFit * weights.familyFit
+  const pct = Math.round((weighted / 5) * 100)
+
+  // Duration fit penalty/bonus
+  let durationFit = 'good'
+  let durationNote = ''
+  if (days < dest.minDays) {
+    durationFit = 'short'
+    durationNote = `Ideally ${dest.minDays}+ days`
+  } else if (days >= dest.idealDays) {
+    durationFit = 'ideal'
+    durationNote = 'Great trip length'
+  }
+
+  // Collect notes from the spanned months
+  const highlights = months.map(m => dest.months[m].notes)
+
+  return { dest, score: pct, avg, durationFit, durationNote, highlights, months, days }
+}
+
+function rankDestinations(startDate, endDate) {
+  return DESTINATIONS
+    .map(d => scoreDestination(d, startDate, endDate))
+    .sort((a, b) => b.score - a.score)
+}
+
+function bestWindows(destId) {
+  const dest = DESTINATIONS.find(d => d.id === destId)
+  if (!dest) return []
+  return WINDOWS
+    .map(w => {
+      const ext = { before: 0, after: 0 }
+      const start = w.start
+      const end = w.end
+      const result = scoreDestination(dest, start, end)
+      return { ...result, window: w }
+    })
+    .sort((a, b) => b.score - a.score)
+}
+
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const WINDOWS = [
   {
@@ -91,6 +284,82 @@ function fmtShort(d) {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
+// ─── ScoreBadge ──────────────────────────────────────────────────────────────
+function ScoreBadge({ score }) {
+  const color = score >= 75 ? '#22c55e' : score >= 55 ? '#eab308' : '#ef4444'
+  return (
+    <span style={{
+      display: 'inline-block',
+      background: color + '22',
+      color,
+      fontSize: 13,
+      fontWeight: 700,
+      fontFamily: FONT,
+      borderRadius: 6,
+      padding: '2px 8px',
+      minWidth: 36,
+      textAlign: 'center',
+    }}>
+      {score}
+    </span>
+  )
+}
+
+// ─── DimensionBar ────────────────────────────────────────────────────────────
+function DimensionBar({ label, value, color }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+      <span style={{ fontSize: 11, color: MUTED, width: 56, flexShrink: 0 }}>{label}</span>
+      <div style={{ flex: 1, height: 4, background: BORDER, borderRadius: 2, overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: `${(value / 5) * 100}%`, background: color, borderRadius: 2 }} />
+      </div>
+    </div>
+  )
+}
+
+// ─── DestinationMatches (shown inside window drawer) ─────────────────────────
+function DestinationMatches({ startDate, endDate, windowColor }) {
+  const ranked = rankDestinations(startDate, endDate)
+
+  return (
+    <div style={{ marginTop: 16, borderTop: `1px solid ${BORDER}`, paddingTop: 12 }}>
+      <div style={{ fontSize: 10, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>
+        Destination match
+      </div>
+      {ranked.map(r => (
+        <div key={r.dest.id} style={{
+          background: BG,
+          border: `1px solid ${BORDER}`,
+          borderRadius: 8,
+          padding: '10px 12px',
+          marginBottom: 6,
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: 18 }}>{r.dest.emoji}</span>
+              <span style={{ fontSize: 15, color: TEXT, fontWeight: 600, fontFamily: FONT }}>{r.dest.name}</span>
+              {r.durationFit === 'short' && (
+                <span style={{ fontSize: 11, color: '#ef4444', fontStyle: 'italic' }}>{r.durationNote}</span>
+              )}
+              {r.durationFit === 'ideal' && (
+                <span style={{ fontSize: 11, color: '#22c55e', fontStyle: 'italic' }}>{r.durationNote}</span>
+              )}
+            </div>
+            <ScoreBadge score={r.score} />
+          </div>
+          <DimensionBar label="Weather" value={r.avg.weather} color="#f59e0b" />
+          <DimensionBar label="Crowds" value={r.avg.crowds} color="#8b5cf6" />
+          <DimensionBar label="Cost" value={r.avg.cost} color="#22c55e" />
+          <DimensionBar label="Family" value={r.avg.familyFit} color="#3b82f6" />
+          <div style={{ fontSize: 12, color: MUTED, marginTop: 6, lineHeight: 1.5 }}>
+            {r.highlights[0]}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 // ─── SliderRow ────────────────────────────────────────────────────────────────
 function SliderRow({ label, value, max, minDate, maxDate, ptoCost, color, onChange }) {
   if (max === 0) return null
@@ -148,6 +417,11 @@ function DrawerPanel({ w, ext, onExtChange }) {
         ptoCost={ext.after}
         color={w.color}
         onChange={val => onExtChange({ ...ext, after: val })}
+      />
+      <DestinationMatches
+        startDate={addDays(w.start, -ext.before)}
+        endDate={addDays(w.end, ext.after)}
+        windowColor={w.color}
       />
     </div>
   )
@@ -397,6 +671,146 @@ function SummaryBar({ totalPto }) {
   )
 }
 
+// ─── MonthHeatmap ────────────────────────────────────────────────────────────
+const MONTH_LABELS = ['J','F','M','A','M','J','J','A','S','O','N','D']
+
+function MonthHeatmap({ dest }) {
+  return (
+    <div style={{ display: 'flex', gap: 3, margin: '8px 0 4px' }}>
+      {dest.months.map((m, i) => {
+        const overall = (m.weather + m.crowds + m.cost + m.familyFit) / 4
+        const pct = overall / 5
+        const color = pct >= 0.75 ? '#22c55e' : pct >= 0.55 ? '#eab308' : '#ef4444'
+        return (
+          <div key={i} style={{ flex: 1, textAlign: 'center' }}>
+            <div style={{
+              height: 20,
+              borderRadius: 3,
+              background: color + Math.round(pct * 200 + 55).toString(16).padStart(2, '0'),
+              marginBottom: 2,
+            }} />
+            <span style={{ fontSize: 9, color: MUTED }}>{MONTH_LABELS[i]}</span>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+// ─── DestinationsTab ─────────────────────────────────────────────────────────
+function DestinationsTab({ selectedDest, onSelectDest, selected, extensions }) {
+  const dest = DESTINATIONS.find(d => d.id === selectedDest)
+  const windowScores = dest ? bestWindows(dest.id) : []
+
+  return (
+    <div style={{ padding: '0 16px 100px' }}>
+      <div style={{ height: 16 }} />
+
+      {/* Destination picker */}
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 16 }}>
+        {DESTINATIONS.map(d => (
+          <button
+            key={d.id}
+            onClick={() => onSelectDest(selectedDest === d.id ? null : d.id)}
+            style={{
+              background: selectedDest === d.id ? TEAL + '22' : SURFACE,
+              border: `1px solid ${selectedDest === d.id ? TEAL : BORDER}`,
+              borderRadius: 8,
+              padding: '8px 14px',
+              color: selectedDest === d.id ? TEXT : MUTED,
+              fontSize: 14,
+              fontFamily: FONT,
+              fontWeight: 500,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
+          >
+            <span>{d.emoji}</span>
+            {d.name}
+          </button>
+        ))}
+      </div>
+
+      {!dest && (
+        <div style={{ textAlign: 'center', padding: '40px 16px' }}>
+          <div style={{ fontSize: 36, marginBottom: 12 }}>🌍</div>
+          <p style={{ color: MUTED, fontSize: 15, fontFamily: FONT }}>Pick a destination to see which travel windows are the best fit.</p>
+        </div>
+      )}
+
+      {dest && (
+        <>
+          {/* Destination header */}
+          <div style={{
+            background: SURFACE,
+            border: `1px solid ${BORDER}`,
+            borderRadius: 10,
+            padding: 16,
+            marginBottom: 12,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+              <span style={{ fontSize: 28 }}>{dest.emoji}</span>
+              <div>
+                <div style={{ fontSize: 20, color: TEXT, fontWeight: 700, fontFamily: FONT }}>{dest.name}</div>
+                <div style={{ fontSize: 13, color: MUTED }}>{dest.country} · {dest.idealDays}-day ideal · {dest.minDays}-day minimum</div>
+              </div>
+            </div>
+            <MonthHeatmap dest={dest} />
+            <div style={{ fontSize: 11, color: MUTED, marginTop: 4 }}>Monthly seasonality — green = best conditions</div>
+          </div>
+
+          {/* Window ranking */}
+          <div style={{ fontSize: 10, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8, marginTop: 20 }}>
+            Best windows for {dest.name}
+          </div>
+          {windowScores.map(r => {
+            const w = r.window
+            const isSelected = selected.has(w.id)
+            const ext = extensions[w.id] || { before: 0, after: 0 }
+            const start = addDays(w.start, -ext.before)
+            const end = addDays(w.end, ext.after)
+
+            return (
+              <div key={w.id} style={{
+                background: SURFACE,
+                border: `1px solid ${isSelected ? w.color : BORDER}`,
+                borderRadius: 10,
+                padding: '12px 14px',
+                marginBottom: 8,
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                  <div>
+                    <div style={{ fontSize: 15, color: TEXT, fontWeight: 600, fontFamily: FONT }}>{w.title}</div>
+                    <div style={{ fontSize: 12, color: MUTED, marginTop: 2 }}>
+                      {fmtShort(start)} – {fmtShort(end)} · {diffDays(start, end)} days
+                      {w.basePto > 0 && <span style={{ color: w.color }}> · {w.basePto + ext.before + ext.after} PTO</span>}
+                    </div>
+                  </div>
+                  <ScoreBadge score={r.score} />
+                </div>
+                <DimensionBar label="Weather" value={r.avg.weather} color="#f59e0b" />
+                <DimensionBar label="Crowds" value={r.avg.crowds} color="#8b5cf6" />
+                <DimensionBar label="Cost" value={r.avg.cost} color="#22c55e" />
+                <DimensionBar label="Family" value={r.avg.familyFit} color="#3b82f6" />
+                {r.durationFit === 'short' && (
+                  <div style={{ fontSize: 11, color: '#ef4444', marginTop: 6, fontStyle: 'italic' }}>
+                    ⚠ Window is shorter than recommended {dest.minDays}-day minimum
+                  </div>
+                )}
+                <div style={{ fontSize: 12, color: MUTED, marginTop: 6, lineHeight: 1.5 }}>
+                  {r.highlights[0]}
+                </div>
+              </div>
+            )
+          })}
+        </>
+      )}
+    </div>
+  )
+}
+
 // ─── PlanTab ──────────────────────────────────────────────────────────────────
 function PlanTab({ selected, extensions, totalPto, onRemove }) {
   const selectedWindows = WINDOWS.filter(w => selected.has(w.id))
@@ -480,43 +894,46 @@ function GlobalHeader({ view, setView, totalPto, selectedCount }) {
 
       {/* Tab bar */}
       <div style={{ display: 'flex', gap: 0, borderTop: `1px solid ${BORDER}`, margin: '0 -16px' }}>
-        {['windows', 'plan'].map(tab => (
-          <button
-            key={tab}
-            onClick={() => setView(tab)}
-            style={{
-              flex: 1,
-              height: 44,
-              background: 'none',
-              border: 'none',
-              borderBottom: view === tab ? `2px solid ${TEAL}` : '2px solid transparent',
-              color: view === tab ? TEXT : MUTED,
-              fontSize: 15,
-              fontFamily: FONT,
-              fontWeight: 500,
-              cursor: 'pointer',
-              letterSpacing: 0,
-              transition: 'color 0.2s, border-color 0.2s',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 6,
-            }}
-          >
-            {tab === 'windows' ? 'Windows' : 'Plan'}
-            {tab === 'plan' && selectedCount > 0 && (
-              <span style={{
-                background: TEAL,
-                color: BG,
-                borderRadius: 10,
-                fontSize: 11,
+        {['windows', 'destinations', 'plan'].map(tab => {
+          const label = tab === 'windows' ? 'Windows' : tab === 'destinations' ? 'Destinations' : 'Plan'
+          return (
+            <button
+              key={tab}
+              onClick={() => setView(tab)}
+              style={{
+                flex: 1,
+                height: 44,
+                background: 'none',
+                border: 'none',
+                borderBottom: view === tab ? `2px solid ${TEAL}` : '2px solid transparent',
+                color: view === tab ? TEXT : MUTED,
+                fontSize: 14,
                 fontFamily: FONT,
-                padding: '1px 7px',
-                fontWeight: 700,
-              }}>{selectedCount}</span>
-            )}
-          </button>
-        ))}
+                fontWeight: 500,
+                cursor: 'pointer',
+                letterSpacing: 0,
+                transition: 'color 0.2s, border-color 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 6,
+              }}
+            >
+              {label}
+              {tab === 'plan' && selectedCount > 0 && (
+                <span style={{
+                  background: TEAL,
+                  color: BG,
+                  borderRadius: 10,
+                  fontSize: 11,
+                  fontFamily: FONT,
+                  padding: '1px 7px',
+                  fontWeight: 700,
+                }}>{selectedCount}</span>
+              )}
+            </button>
+          )
+        })}
       </div>
     </div>
   )
@@ -528,6 +945,7 @@ function App() {
   const [extensions, setExtensions] = useState({})
   const [openDrawer, setOpenDrawer] = useState(null)
   const [view, setView] = useState('windows')
+  const [selectedDest, setSelectedDest] = useState(null)
 
   const getExt = id => extensions[id] || { before: 0, after: 0 }
 
@@ -595,6 +1013,13 @@ function App() {
           onToggleSelect={toggleSelect}
           onToggleDrawer={toggleDrawer}
           onExtChange={setExtChange}
+        />
+      ) : view === 'destinations' ? (
+        <DestinationsTab
+          selectedDest={selectedDest}
+          onSelectDest={setSelectedDest}
+          selected={selected}
+          extensions={extensions}
         />
       ) : (
         <PlanTab
