@@ -17,63 +17,63 @@ const WINDOWS = [
     id: 'labor-day', title: 'Labor Day Weekend', section: 'free',
     start: new Date(2026, 8, 5), end: new Date(2026, 8, 7),
     basePto: 0, maxExtendBefore: 2, maxExtendAfter: 2,
-    note: 'Meta holiday Sep 7 + school off. Free long weekend.',
+    note: 'Work holiday Sep 7 + school off. Free long weekend.',
     color: '#0d9488',
   },
   {
-    id: 'mlk', title: 'MLK + Meta Day', section: 'free',
+    id: 'mlk', title: 'MLK Weekend', section: 'free',
     start: new Date(2027, 0, 16), end: new Date(2027, 0, 19),
     basePto: 0, maxExtendBefore: 2, maxExtendAfter: 2,
-    note: 'School off Jan 18, Meta holiday Jan 19. Free 4-day weekend.',
+    note: 'School off Jan 18, work holiday Jan 19. Free 4-day weekend.',
     color: '#0d9488',
   },
   {
     id: 'presidents', title: "Presidents' Day Stretch", section: 'free',
     start: new Date(2027, 1, 12), end: new Date(2027, 1, 16),
     basePto: 0, maxExtendBefore: 2, maxExtendAfter: 2,
-    note: 'FUSD non-work day Feb 12, Presidents\u2019 Day Feb 15, Meta holiday Feb 16. Best free stretch.',
+    note: 'School non-work day Feb 12, Presidents\u2019 Day Feb 15, work holiday Feb 16. Best free stretch.',
     color: '#0d9488',
   },
   {
     id: 'memorial', title: 'Memorial Day + Last Day', section: 'free',
     start: new Date(2027, 4, 29), end: new Date(2027, 4, 31),
     basePto: 0, maxExtendBefore: 2, maxExtendAfter: 2,
-    note: 'Meta holiday May 31 + school ends Jun 1. Summer kickoff.',
+    note: 'Work holiday May 31 + school ends Jun 1. Summer kickoff.',
     color: '#0d9488',
   },
   {
     id: 'fall-recess', title: 'Fall Recess', section: 'pto',
     start: new Date(2026, 10, 21), end: new Date(2026, 10, 29),
     basePto: 2, maxExtendBefore: 3, maxExtendAfter: 3,
-    note: 'School off Nov 23\u201327. Meta covers Thanksgiving + day after. 2 PTO days = 10-day stretch.',
+    note: 'School off Nov 23\u201327. Work covers Thanksgiving + day after. 2 PTO days = 10-day stretch.',
     color: '#2563eb',
   },
   {
     id: 'winter-min', title: 'Winter Break (minimal)', section: 'pto',
     start: new Date(2026, 11, 19), end: new Date(2027, 0, 4),
     basePto: 1, maxExtendBefore: 0, maxExtendAfter: 3,
-    note: '1 PTO day (Dec 19 head start). School off Dec 21\u2013Jan 4. Meta covers Dec 24, 25 & 31.',
+    note: '1 PTO day (Dec 19 head start). School off Dec 21\u2013Jan 4. Work covers Dec 24, 25 & 31.',
     color: '#2563eb',
   },
   {
     id: 'winter-full', title: 'Winter Break (full dark)', section: 'pto',
     start: new Date(2026, 11, 19), end: new Date(2027, 0, 4),
     basePto: 6, maxExtendBefore: 0, maxExtendAfter: 3,
-    note: '6 PTO days \u2014 fully offline both work weeks. Meta covers Dec 24, 25 & 31.',
+    note: '6 PTO days \u2014 fully offline both work weeks. Work covers Dec 24, 25 & 31.',
     color: '#7c3aed',
   },
   {
     id: 'spring', title: 'Spring Break', section: 'pto',
     start: new Date(2027, 2, 13), end: new Date(2027, 2, 21),
     basePto: 5, maxExtendBefore: 2, maxExtendAfter: 2,
-    note: 'School off Mar 15\u201319. No Meta holidays \u2014 most PTO-expensive week. Use choice days here.',
+    note: 'School off Mar 15\u201319. No work holidays \u2014 most PTO-expensive week. Use choice days here.',
     color: '#d97706',
   },
   {
     id: 'summer', title: 'Summer Trip', section: 'pto',
     start: new Date(2027, 5, 2), end: new Date(2027, 5, 18),
     basePto: 10, maxExtendBefore: 0, maxExtendAfter: 5,
-    note: 'School fully out. Juneteenth Jun 18 is a free Meta holiday at the end. Best window for a big trip.',
+    note: 'School fully out. Juneteenth Jun 18 is a free work holiday at the end. Best window for a big trip.',
     color: '#dc2626',
   },
 ]
@@ -451,7 +451,7 @@ function GlobalHeader({ view, setView, totalPto, selectedCount }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
         <div>
           <div style={{ fontSize: 18, fontFamily: FONT, color: TEXT, fontWeight: 700 }}>Travel Windows</div>
-          <div style={{ fontSize: 12, color: MUTED, marginTop: 2, letterSpacing: '0.02em' }}>FUSD · Meta · 2026–27</div>
+          <div style={{ fontSize: 12, color: MUTED, marginTop: 2, letterSpacing: '0.02em' }}>2026–27</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 32, fontFamily: FONT, color: over ? RED : TEXT, lineHeight: 1, fontWeight: 300 }}>
