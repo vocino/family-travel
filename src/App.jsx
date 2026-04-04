@@ -9,7 +9,7 @@ const TEXT    = '#e8e4dc'
 const MUTED   = '#5a5a7a'
 const TEAL    = '#0d9488'
 const RED     = '#dc2626'
-const FONT    = "Georgia, 'Times New Roman', serif"
+const FONT    = "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const WINDOWS = [
@@ -97,8 +97,8 @@ function SliderRow({ label, value, max, minDate, maxDate, ptoCost, color, onChan
   return (
     <div style={{ marginTop: 12 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
-        <span style={{ fontSize: 11, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</span>
-        <span style={{ fontSize: 12, color: TEXT }}>
+        <span style={{ fontSize: 12, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</span>
+        <span style={{ fontSize: 13, color: TEXT }}>
           {value === 0 ? 'none' : `+${value} day${value !== 1 ? 's' : ''}`}
           {value > 0 && <span style={{ color: color, marginLeft: 6 }}>+{ptoCost} PTO</span>}
         </span>
@@ -128,7 +128,7 @@ function DrawerPanel({ w, ext, onExtChange }) {
 
   return (
     <div style={{ padding: '12px 16px 16px', borderTop: `1px solid ${BORDER}` }}>
-      <p style={{ margin: '0 0 12px', fontSize: 13, color: TEXT, lineHeight: 1.5 }}>{w.note}</p>
+      <p style={{ margin: '0 0 12px', fontSize: 14, color: TEXT, lineHeight: 1.6 }}>{w.note}</p>
       <SliderRow
         label="Extend before"
         value={ext.before}
@@ -222,16 +222,16 @@ function WindowRow({ w, isSelected, isOpen, ext, onToggleSelect, onToggleDrawer,
           }}
         >
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 14, fontFamily: FONT, color: TEXT, fontWeight: 600 }}>{w.title}</div>
-            <div style={{ fontSize: 12, color: MUTED, marginTop: 2 }}>
+            <div style={{ fontSize: 16, fontFamily: FONT, color: TEXT, fontWeight: 600 }}>{w.title}</div>
+            <div style={{ fontSize: 13, color: MUTED, marginTop: 3 }}>
               {fmtShort(start)} – {fmtShort(end)}
             </div>
           </div>
           <div style={{ textAlign: 'right', marginRight: 10, flexShrink: 0 }}>
-            <div style={{ fontSize: 18, fontFamily: FONT, color: TEXT, lineHeight: 1 }}>{days}</div>
-            <div style={{ fontSize: 10, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em' }}>days</div>
+            <div style={{ fontSize: 22, fontFamily: FONT, color: TEXT, lineHeight: 1, fontWeight: 300 }}>{days}</div>
+            <div style={{ fontSize: 11, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.04em' }}>days</div>
             {pto > 0 && (
-              <div style={{ fontSize: 11, color: w.color, marginTop: 2 }}>{pto} PTO</div>
+              <div style={{ fontSize: 12, color: w.color, marginTop: 2, fontWeight: 600 }}>{pto} PTO</div>
             )}
           </div>
           {/* Chevron */}
@@ -325,8 +325,8 @@ function PlanCard({ w, ext, onRemove }) {
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 15, fontFamily: FONT, color: TEXT, fontWeight: 600 }}>{w.title}</div>
-          <div style={{ fontSize: 12, color: MUTED, marginTop: 3 }}>{fmtShort(start)} – {fmtShort(end)}</div>
+          <div style={{ fontSize: 17, fontFamily: FONT, color: TEXT, fontWeight: 600 }}>{w.title}</div>
+          <div style={{ fontSize: 13, color: MUTED, marginTop: 3 }}>{fmtShort(start)} – {fmtShort(end)}</div>
         </div>
         <button
           onClick={onRemove}
@@ -348,13 +348,13 @@ function PlanCard({ w, ext, onRemove }) {
       </div>
       <div style={{ display: 'flex', gap: 20 }}>
         <div>
-          <span style={{ fontSize: 22, fontFamily: FONT, color: TEXT }}>{days}</span>
-          <span style={{ fontSize: 11, color: MUTED, marginLeft: 4 }}>days off</span>
+          <span style={{ fontSize: 26, fontFamily: FONT, color: TEXT, fontWeight: 300 }}>{days}</span>
+          <span style={{ fontSize: 12, color: MUTED, marginLeft: 5 }}>days off</span>
         </div>
         {pto > 0 && (
           <div>
-            <span style={{ fontSize: 22, fontFamily: FONT, color: w.color }}>{pto}</span>
-            <span style={{ fontSize: 11, color: MUTED, marginLeft: 4 }}>PTO days</span>
+            <span style={{ fontSize: 26, fontFamily: FONT, color: w.color, fontWeight: 300 }}>{pto}</span>
+            <span style={{ fontSize: 12, color: MUTED, marginLeft: 5 }}>PTO days</span>
           </div>
         )}
       </div>
@@ -376,8 +376,8 @@ function SummaryBar({ totalPto }) {
       margin: '20px 0 0',
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-        <span style={{ fontSize: 13, color: MUTED }}>Total PTO</span>
-        <span style={{ fontSize: 13, color: over ? RED : TEXT }}>
+        <span style={{ fontSize: 14, color: MUTED }}>Total PTO</span>
+        <span style={{ fontSize: 14, color: over ? RED : TEXT }}>
           {totalPto} / 21 days
         </span>
       </div>
@@ -390,7 +390,7 @@ function SummaryBar({ totalPto }) {
           transition: 'width 0.4s, background 0.3s',
         }} />
       </div>
-      <p style={{ fontSize: 11, color: MUTED, margin: '10px 0 0', lineHeight: 1.5 }}>
+      <p style={{ fontSize: 12, color: MUTED, margin: '10px 0 0', lineHeight: 1.6 }}>
         PTO cap is 31.5 days. Target spend ~21 days (projected EOY balance 30.09 + 2 choice days exceeds cap).
       </p>
     </div>
@@ -405,7 +405,7 @@ function PlanTab({ selected, extensions, totalPto, onRemove }) {
     return (
       <div style={{ padding: '60px 16px', textAlign: 'center' }}>
         <div style={{ fontSize: 40, marginBottom: 16 }}>✈</div>
-        <p style={{ fontSize: 15, color: MUTED, fontFamily: FONT }}>Go to Windows to start planning.</p>
+        <p style={{ fontSize: 16, color: MUTED, fontFamily: FONT }}>Go to Windows to start planning.</p>
       </div>
     )
   }
@@ -450,15 +450,15 @@ function GlobalHeader({ view, setView, totalPto, selectedCount }) {
       {/* Title row */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
         <div>
-          <div style={{ fontSize: 16, fontFamily: FONT, color: TEXT, fontWeight: 700 }}>Travel Windows</div>
-          <div style={{ fontSize: 10, color: MUTED, marginTop: 1, letterSpacing: '0.04em' }}>FUSD · Meta · 2026–27</div>
+          <div style={{ fontSize: 18, fontFamily: FONT, color: TEXT, fontWeight: 700 }}>Travel Windows</div>
+          <div style={{ fontSize: 12, color: MUTED, marginTop: 2, letterSpacing: '0.02em' }}>FUSD · Meta · 2026–27</div>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 28, fontFamily: FONT, color: over ? RED : TEXT, lineHeight: 1 }}>
+          <div style={{ fontSize: 32, fontFamily: FONT, color: over ? RED : TEXT, lineHeight: 1, fontWeight: 300 }}>
             {totalPto}
-            <span style={{ fontSize: 14, color: MUTED }}> / 21</span>
+            <span style={{ fontSize: 16, color: MUTED, fontWeight: 400 }}> / 21</span>
           </div>
-          <div style={{ fontSize: 10, color: MUTED, letterSpacing: '0.04em' }}>PTO days</div>
+          <div style={{ fontSize: 11, color: MUTED, letterSpacing: '0.02em' }}>PTO days</div>
         </div>
       </div>
 
@@ -474,7 +474,7 @@ function GlobalHeader({ view, setView, totalPto, selectedCount }) {
       </div>
 
       {/* Status line */}
-      <div style={{ fontSize: 11, color: over ? RED : MUTED, marginBottom: 8, letterSpacing: '0.02em' }}>
+      <div style={{ fontSize: 12, color: over ? RED : MUTED, marginBottom: 8 }}>
         {statusText}
       </div>
 
@@ -491,10 +491,11 @@ function GlobalHeader({ view, setView, totalPto, selectedCount }) {
               border: 'none',
               borderBottom: view === tab ? `2px solid ${TEAL}` : '2px solid transparent',
               color: view === tab ? TEXT : MUTED,
-              fontSize: 13,
+              fontSize: 15,
               fontFamily: FONT,
+              fontWeight: 500,
               cursor: 'pointer',
-              letterSpacing: '0.04em',
+              letterSpacing: 0,
               transition: 'color 0.2s, border-color 0.2s',
               display: 'flex',
               alignItems: 'center',
