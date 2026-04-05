@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import ReactDOM from 'react-dom/client'
 
 // ─── Theme ───────────────────────────────────────────────────────────────────
@@ -270,6 +270,79 @@ const WINDOWS = [
     color: '#dc2626',
   },
 ]
+
+const VALID_VIEWS = new Set(['windows', 'destinations', 'plan'])
+const WINDOW_ID_SET = new Set(WINDOWS.map(w => w.id))
+const DEST_ID_SET = new Set(DESTINATIONS.map(d => d.id))
+
+// ─── Shareable URL state (?s=) ────────────────────────────────────────────────
+const SHARE_STATE_VERSION = 1
+
+function base64UrlEncode(str) {
+  const bin = new TextEncoder().encode(str)
+  let out = ''
+  for (let i = 0; i < bin.length; i++) out += String.fromCharCode(bin[i])
+  return btoa(out).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+
+function base64UrlDecode(s) {
+  const pad = '='.repeat((4 - (s.length % 4)) % 4)
+  const b64 = s.replace(/-/g, '+').replace(/_/g, '/') + pad
+  const bin = atob(b64)
+  const bytes = new Uint8Array(bin.length)
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
+  return new TextDecoder().decode(bytes)
+}
+
+function sanitizeSharePayload(raw) {
+  if (!raw || typeof raw !== 'object' || raw.v !== SHARE_STATE_VERSION) return null
+
+  const view = VALID_VIEWS.has(raw.view) ? raw.view : 'windows'
+
+  const sel = Array.isArray(raw.sel)
+    ? [...new Set(raw.sel.filter(id => WINDOW_ID_SET.has(id)))]
+    : []
+
+  const ext = {}
+  if (raw.ext && typeof raw.ext === 'object') {
+    for (const [id, val] of Object.entries(raw.ext)) {
+      if (!WINDOW_ID_SET.has(id)) continue
+      const w = WINDOWS.find(x => x.id === id)
+      const before = Math.max(0, Math.min(w.maxExtendBefore, Math.round(Number(val?.before) || 0)))
+      const after = Math.max(0, Math.min(w.maxExtendAfter, Math.round(Number(val?.after) || 0)))
+      if (before || after) ext[id] = { before, after }
+    }
+  }
+
+  const dest = raw.dest != null && DEST_ID_SET.has(String(raw.dest)) ? String(raw.dest) : null
+  const drawer = raw.drawer != null && WINDOW_ID_SET.has(String(raw.drawer)) ? String(raw.drawer) : null
+
+  return { view, sel, ext, dest, drawer }
+}
+
+function readShareStateFromUrl() {
+  try {
+    const params = new URLSearchParams(window.location.search)
+    const enc = params.get('s')
+    if (!enc) return null
+    const json = base64UrlDecode(decodeURIComponent(enc.replace(/ /g, '+')))
+    return sanitizeSharePayload(JSON.parse(json))
+  } catch {
+    return null
+  }
+}
+
+function isDefaultSharePayload(view, sel, ext, dest, drawer) {
+  return (
+    view === 'windows'
+    && sel.length === 0
+    && Object.keys(ext).length === 0
+    && dest == null
+    && drawer == null
+  )
+}
+
+const INITIAL_SHARE = typeof window !== 'undefined' ? readShareStateFromUrl() : null
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function addDays(d, n) {
@@ -841,7 +914,7 @@ function PlanTab({ selected, extensions, totalPto, onRemove }) {
 }
 
 // ─── GlobalHeader ─────────────────────────────────────────────────────────────
-function GlobalHeader({ view, setView, totalPto, selectedCount }) {
+function GlobalHeader({ view, setView, totalPto, selectedCount, shareHint, onCopyShareLink }) {
   const pct = Math.min(totalPto / 21, 1)
   const over = totalPto > 21
   const barColor = totalPto === 0 ? MUTED : over ? RED : TEAL
@@ -865,7 +938,28 @@ function GlobalHeader({ view, setView, totalPto, selectedCount }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
         <div>
           <div style={{ fontSize: 18, fontFamily: FONT, color: TEXT, fontWeight: 700 }}>Travel Windows</div>
-          <div style={{ fontSize: 12, color: MUTED, marginTop: 2, letterSpacing: '0.02em' }}>2026–27</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginTop: 4 }}>
+            <span style={{ fontSize: 12, color: MUTED, letterSpacing: '0.02em' }}>2026–27</span>
+            <button
+              type="button"
+              onClick={onCopyShareLink}
+              style={{
+                background: 'none',
+                border: `1px solid ${BORDER}`,
+                borderRadius: 6,
+                color: shareHint ? TEAL : MUTED,
+                fontSize: 11,
+                fontFamily: FONT,
+                fontWeight: 600,
+                padding: '4px 10px',
+                cursor: 'pointer',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+              }}
+            >
+              {shareHint || 'Copy link'}
+            </button>
+          </div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 32, fontFamily: FONT, color: over ? RED : TEXT, lineHeight: 1, fontWeight: 300 }}>
@@ -941,13 +1035,53 @@ function GlobalHeader({ view, setView, totalPto, selectedCount }) {
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 function App() {
-  const [selected, setSelected] = useState(new Set())
-  const [extensions, setExtensions] = useState({})
-  const [openDrawer, setOpenDrawer] = useState(null)
-  const [view, setView] = useState('windows')
-  const [selectedDest, setSelectedDest] = useState(null)
+  const [selected, setSelected] = useState(() => new Set(INITIAL_SHARE?.sel ?? []))
+  const [extensions, setExtensions] = useState(() => ({ ...(INITIAL_SHARE?.ext ?? {}) }))
+  const [openDrawer, setOpenDrawer] = useState(() => INITIAL_SHARE?.drawer ?? null)
+  const [view, setView] = useState(() => INITIAL_SHARE?.view ?? 'windows')
+  const [selectedDest, setSelectedDest] = useState(() => INITIAL_SHARE?.dest ?? null)
+  const [shareHint, setShareHint] = useState(null)
 
   const getExt = id => extensions[id] || { before: 0, after: 0 }
+
+  useEffect(() => {
+    const selArr = [...selected].sort()
+    const extObj = {}
+    for (const [id, val] of Object.entries(extensions)) {
+      if (!WINDOW_ID_SET.has(id)) continue
+      const w = WINDOWS.find(x => x.id === id)
+      const b = Math.max(0, Math.min(w.maxExtendBefore, Math.round(Number(val?.before) || 0)))
+      const a = Math.max(0, Math.min(w.maxExtendAfter, Math.round(Number(val?.after) || 0)))
+      if (b || a) extObj[id] = { before: b, after: a }
+    }
+    const isDefault = isDefaultSharePayload(view, selArr, extObj, selectedDest, openDrawer)
+    const url = new URL(window.location.href)
+    if (isDefault) url.searchParams.delete('s')
+    else {
+      const payload = {
+        v: SHARE_STATE_VERSION,
+        view,
+        sel: selArr,
+        ext: extObj,
+        dest: selectedDest,
+        drawer: openDrawer,
+      }
+      url.searchParams.set('s', base64UrlEncode(JSON.stringify(payload)))
+    }
+    const next = url.pathname + url.search + url.hash
+    const cur = window.location.pathname + window.location.search + window.location.hash
+    if (next !== cur) window.history.replaceState(null, '', next)
+  }, [selected, extensions, view, selectedDest, openDrawer])
+
+  const copyShareLink = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+      setShareHint('Copied')
+    } catch {
+      setShareHint('Failed')
+    }
+    setTimeout(() => setShareHint(null), 2000)
+  }, [])
 
   const totalPto = useMemo(() =>
     Array.from(selected).reduce((sum, id) => {
@@ -1004,6 +1138,8 @@ function App() {
         setView={setView}
         totalPto={totalPto}
         selectedCount={selected.size}
+        shareHint={shareHint}
+        onCopyShareLink={copyShareLink}
       />
       {view === 'windows' ? (
         <WindowsTab
