@@ -1,0 +1,110 @@
+[
+  {
+    "id": "labor-day",
+    "title": "Labor Day Weekend",
+    "section": "free",
+    "start": "2026-09-05",
+    "end": "2026-09-07",
+    "basePto": 0,
+    "maxExtendBefore": 2,
+    "maxExtendAfter": 2,
+    "note": "Work holiday Sep 7 + school off. Free long weekend.",
+    "color": "#0d9488"
+  },
+  {
+    "id": "mlk",
+    "title": "MLK Weekend",
+    "section": "free",
+    "start": "2027-01-16",
+    "end": "2027-01-19",
+    "basePto": 0,
+    "maxExtendBefore": 2,
+    "maxExtendAfter": 2,
+    "note": "School off Jan 18, work holiday Jan 19. Free 4-day weekend.",
+    "color": "#0d9488"
+  },
+  {
+    "id": "presidents",
+    "title": "Presidents' Day Stretch",
+    "section": "free",
+    "start": "2027-02-12",
+    "end": "2027-02-16",
+    "basePto": 0,
+    "maxExtendBefore": 2,
+    "maxExtendAfter": 2,
+    "note": "School non-work day Feb 12, Presidents’ Day Feb 15, work holiday Feb 16. Best free stretch.",
+    "color": "#0d9488"
+  },
+  {
+    "id": "memorial",
+    "title": "Memorial Day + Last Day",
+    "section": "free",
+    "start": "2027-05-29",
+    "end": "2027-05-31",
+    "basePto": 0,
+    "maxExtendBefore": 2,
+    "maxExtendAfter": 2,
+    "note": "Work holiday May 31 + school ends Jun 1. Summer kickoff.",
+    "color": "#0d9488"
+  },
+  {
+    "id": "fall-recess",
+    "title": "Fall Recess",
+    "section": "pto",
+    "start": "2026-11-21",
+    "end": "2026-11-29",
+    "basePto": 2,
+    "maxExtendBefore": 3,
+    "maxExtendAfter": 3,
+    "note": "School off Nov 23–27. Work covers Thanksgiving + day after. 2 PTO days = 10-day stretch.",
+    "color": "#2563eb"
+  },
+  {
+    "id": "winter-min",
+    "title": "Winter Break (minimal)",
+    "section": "pto",
+    "start": "2026-12-19",
+    "end": "2027-01-04",
+    "basePto": 1,
+    "maxExtendBefore": 0,
+    "maxExtendAfter": 3,
+    "note": "1 PTO day (Dec 19 head start). School off Dec 21–Jan 4. Work covers Dec 24, 25 & 31.",
+    "color": "#2563eb"
+  },
+  {
+    "id": "winter-full",
+    "title": "Winter Break (full dark)",
+    "section": "pto",
+    "start": "2026-12-19",
+    "end": "2027-01-04",
+    "basePto": 6,
+    "maxExtendBefore": 0,
+    "maxExtendAfter": 3,
+    "note": "6 PTO days — fully offline both work weeks. Work covers Dec 24, 25 & 31.",
+    "color": "#7c3aed"
+  },
+  {
+    "id": "spring",
+    "title": "Spring Break",
+    "section": "pto",
+    "start": "2027-03-13",
+    "end": "2027-03-21",
+    "basePto": 5,
+    "maxExtendBefore": 2,
+    "maxExtendAfter": 2,
+    "note": "School off Mar 15–19. No work holidays — most PTO-expensive week. Use choice days here.",
+    "color": "#d97706"
+  },
+  {
+    "id": "summer",
+    "title": "Summer Trip",
+    "section": "pto",
+    "start": "2027-06-02",
+    "end": "2027-06-18",
+    "basePto": 10,
+    "maxExtendBefore": 0,
+    "maxExtendAfter": 5,
+    "note": "School fully out. Juneteenth Jun 18 is a free work holiday at the end. Best window for a big trip.",
+    "color": "#dc2626"
+  }
+]

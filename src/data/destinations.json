@@ -1,0 +1,566 @@
+[
+  {
+    "id": "rome",
+    "name": "Rome",
+    "country": "Italy",
+    "emoji": "🏛",
+    "minDays": 5,
+    "idealDays": 8,
+    "months": [
+      {
+        "weather": 2,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 2,
+        "notes": "Cool and rainy, but museums are empty"
+      },
+      {
+        "weather": 2,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 2,
+        "notes": "Carnival season, still chilly"
+      },
+      {
+        "weather": 3,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Warming up, Easter crowds possible"
+      },
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Ideal temps, outdoor dining, spring blooms"
+      },
+      {
+        "weather": 5,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 5,
+        "notes": "Best weather, great for walking with kids"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 4,
+        "notes": "Getting hot, summer crowds arriving"
+      },
+      {
+        "weather": 2,
+        "crowds": 1,
+        "cost": 1,
+        "familyFit": 2,
+        "notes": "Extreme heat, peak crowds and prices"
+      },
+      {
+        "weather": 2,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 2,
+        "notes": "Many locals leave, sweltering but some deals"
+      },
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Heat breaks, shoulder season sweet spot"
+      },
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Mild weather, harvest food festivals"
+      },
+      {
+        "weather": 3,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 3,
+        "notes": "Cooler, uncrowded, good prices"
+      },
+      {
+        "weather": 2,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Christmas markets, festive but cold and rainy"
+      }
+    ]
+  },
+  {
+    "id": "tokyo",
+    "name": "Tokyo",
+    "country": "Japan",
+    "emoji": "⛩",
+    "minDays": 7,
+    "idealDays": 12,
+    "months": [
+      {
+        "weather": 3,
+        "crowds": 4,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Cold but clear, New Year shrines"
+      },
+      {
+        "weather": 3,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 3,
+        "notes": "Early plum blossoms, uncrowded"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 5,
+        "notes": "Cherry blossom season — magical but popular"
+      },
+      {
+        "weather": 5,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 5,
+        "notes": "Late sakura, perfect temps, parks are stunning"
+      },
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Golden Week early May, then pleasant and calm"
+      },
+      {
+        "weather": 2,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 2,
+        "notes": "Rainy season — humid, frequent downpours"
+      },
+      {
+        "weather": 2,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Hot and humid, but summer festivals and fireworks"
+      },
+      {
+        "weather": 2,
+        "crowds": 3,
+        "cost": 2,
+        "familyFit": 3,
+        "notes": "Peak heat, Obon holiday, some closures"
+      },
+      {
+        "weather": 3,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 3,
+        "notes": "Typhoon risk, but crowds thin out"
+      },
+      {
+        "weather": 5,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 5,
+        "notes": "Perfect weather, fall foliage begins"
+      },
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 5,
+        "notes": "Peak autumn colors, comfortable temps"
+      },
+      {
+        "weather": 3,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Holiday illuminations, winter markets, cool but clear"
+      }
+    ]
+  },
+  {
+    "id": "london",
+    "name": "London",
+    "country": "UK",
+    "emoji": "🎡",
+    "minDays": 4,
+    "idealDays": 7,
+    "months": [
+      {
+        "weather": 1,
+        "crowds": 4,
+        "cost": 5,
+        "familyFit": 3,
+        "notes": "Cold and dark, but cheapest flights and great museums"
+      },
+      {
+        "weather": 1,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 2,
+        "notes": "Half-term crowds mid-month, otherwise quiet"
+      },
+      {
+        "weather": 2,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Warming slowly, daffodils in parks"
+      },
+      {
+        "weather": 3,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Spring arrives, longer days, Easter activities"
+      },
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Pleasant, bank holidays, Chelsea Flower Show"
+      },
+      {
+        "weather": 5,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 5,
+        "notes": "Best weather, longest days, outdoor everything"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 5,
+        "notes": "Warm, parks alive, summer school holidays begin"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 4,
+        "notes": "Warm but peak tourist season, Notting Hill Carnival"
+      },
+      {
+        "weather": 3,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Still pleasant, crowds ease, great shoulder month"
+      },
+      {
+        "weather": 2,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Autumn colors, half-term, getting dark early"
+      },
+      {
+        "weather": 1,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 3,
+        "notes": "Bonfire Night, Christmas lights go up late month"
+      },
+      {
+        "weather": 1,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Christmas markets, pantomimes, festive atmosphere"
+      }
+    ]
+  },
+  {
+    "id": "disneyland",
+    "name": "Disneyland",
+    "country": "USA",
+    "emoji": "🏰",
+    "minDays": 3,
+    "idealDays": 5,
+    "months": [
+      {
+        "weather": 4,
+        "crowds": 5,
+        "cost": 5,
+        "familyFit": 4,
+        "notes": "Post-holiday lull — shortest waits of the year"
+      },
+      {
+        "weather": 4,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 4,
+        "notes": "Low crowds except Presidents' Day week"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 3,
+        "notes": "Spring break rush begins mid-month"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 3,
+        "notes": "Spring break crowds linger, Easter busy"
+      },
+      {
+        "weather": 5,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 5,
+        "notes": "Great weather, lighter crowds before summer"
+      },
+      {
+        "weather": 4,
+        "crowds": 1,
+        "cost": 1,
+        "familyFit": 3,
+        "notes": "Summer surge starts — long lines, peak prices"
+      },
+      {
+        "weather": 3,
+        "crowds": 1,
+        "cost": 1,
+        "familyFit": 2,
+        "notes": "Peak everything — hot, packed, expensive"
+      },
+      {
+        "weather": 3,
+        "crowds": 1,
+        "cost": 1,
+        "familyFit": 2,
+        "notes": "Still peak — consider Halloween season late Aug"
+      },
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 5,
+        "notes": "Halloween overlay begins, crowds drop fast"
+      },
+      {
+        "weather": 5,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 5,
+        "notes": "Oogie Boogie Bash, fall decorations, great temps"
+      },
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 5,
+        "notes": "Holiday season starts mid-Nov, festive but busy Thanksgiving"
+      },
+      {
+        "weather": 3,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 4,
+        "notes": "Beautiful decorations, very crowded Christmas–New Year"
+      }
+    ]
+  },
+  {
+    "id": "cancun",
+    "name": "Cancún",
+    "country": "Mexico",
+    "emoji": "🏖",
+    "minDays": 4,
+    "idealDays": 7,
+    "months": [
+      {
+        "weather": 4,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Dry season, warm water, post-holiday value"
+      },
+      {
+        "weather": 5,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Perfect beach weather, whale sharks departing"
+      },
+      {
+        "weather": 5,
+        "crowds": 1,
+        "cost": 1,
+        "familyFit": 2,
+        "notes": "Spring break invasion — very crowded, not ideal for families"
+      },
+      {
+        "weather": 5,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 4,
+        "notes": "Hot and dry, Semana Santa early month"
+      },
+      {
+        "weather": 4,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 4,
+        "notes": "Hot, low crowds, rainy season just starting"
+      },
+      {
+        "weather": 3,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 3,
+        "notes": "Hurricane season begins, afternoon storms"
+      },
+      {
+        "weather": 3,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Hot and humid, summer family travel picks up"
+      },
+      {
+        "weather": 3,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Peak hurricane risk, but good resort deals"
+      },
+      {
+        "weather": 2,
+        "crowds": 5,
+        "cost": 5,
+        "familyFit": 2,
+        "notes": "Hurricane peak, cheapest month, risky for travel"
+      },
+      {
+        "weather": 3,
+        "crowds": 5,
+        "cost": 5,
+        "familyFit": 3,
+        "notes": "Late hurricane season, Day of Dead prep, quiet"
+      },
+      {
+        "weather": 4,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 4,
+        "notes": "Dry season returns, Day of the Dead, great value"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 4,
+        "notes": "Holiday rush picks up, warm escape from winter"
+      }
+    ]
+  },
+  {
+    "id": "reykjavik",
+    "name": "Reykjavik",
+    "country": "Iceland",
+    "emoji": "🌋",
+    "minDays": 5,
+    "idealDays": 9,
+    "months": [
+      {
+        "weather": 1,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 3,
+        "notes": "Dark and cold, but northern lights and ice caves"
+      },
+      {
+        "weather": 1,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 3,
+        "notes": "Northern lights season, days getting longer"
+      },
+      {
+        "weather": 2,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Still wintry, whale watching starts, aurora fading"
+      },
+      {
+        "weather": 2,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Snow melting, puffins arriving, shoulder pricing"
+      },
+      {
+        "weather": 3,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Midnight sun beginning, waterfalls at peak flow"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 1,
+        "familyFit": 5,
+        "notes": "Midnight sun, 24hr daylight, peak hiking, puffins nesting"
+      },
+      {
+        "weather": 4,
+        "crowds": 1,
+        "cost": 1,
+        "familyFit": 5,
+        "notes": "Warmest month, busiest, endless daylight, whale watching peak"
+      },
+      {
+        "weather": 4,
+        "crowds": 2,
+        "cost": 2,
+        "familyFit": 5,
+        "notes": "Still warm-ish, puffins, crowds easing late month"
+      },
+      {
+        "weather": 3,
+        "crowds": 3,
+        "cost": 3,
+        "familyFit": 4,
+        "notes": "Northern lights return, fall colors, shoulder prices"
+      },
+      {
+        "weather": 2,
+        "crowds": 4,
+        "cost": 4,
+        "familyFit": 3,
+        "notes": "Getting dark and cold, aurora season, quiet"
+      },
+      {
+        "weather": 1,
+        "crowds": 5,
+        "cost": 5,
+        "familyFit": 2,
+        "notes": "Dark, stormy, cheapest month, ice caves opening"
+      },
+      {
+        "weather": 1,
+        "crowds": 4,
+        "cost": 3,
+        "familyFit": 3,
+        "notes": "Festive Reykjavik, northern lights, only ~4hrs daylight"
+      }
+    ]
+  }
+]
